@@ -1,0 +1,57 @@
+#review_back_block {
+    position: absolute;
+    z-index: 10;
+    width: 100%;
+    height: 100%;
+    backdrop-filter: blur(4px);
+    border-radius: 10px;
+    display: flex;
+    cursor: pointer;
+}
+
+#review_back_block:before {
+    content: "Show Answer";
+    display: block;
+    margin: auto;
+    background: white;
+    padding: 10px;
+    border-radius: 10px;
+    font-size: 1.25rem;
+}
+
+.self_grading_panel {
+    display: flex;
+    flex: none;
+    justify-content: center;
+    align-items: center;
+    column-gap: 15px;
+}
+
+.self_grading_panel button {
+    font-size: 1.1rem;
+    font-family: "Product Sans Regular", sans-serif;
+    border: white;
+    box-shadow: 0 0 2px #00000022;
+    border-radius: 5px;
+    padding: 5px 10px;
+}
+
+.self_grading_panel button[score="0"] {
+    background: #ffaeae;
+}
+
+.self_grading_panel button[score="2"] {
+    background: #ffc880;
+}
+
+.self_grading_panel button[score="3"] {
+    background: #fff989;
+}
+
+.self_grading_panel button[score="4"] {
+    background: #8dff73;
+}
+
+.self_grading_panel button[score="5"] {
+    background: #89d2ff;
+}

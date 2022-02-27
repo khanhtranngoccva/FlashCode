@@ -1,0 +1,68 @@
+.code_windows_section {
+    /*padding: 15px 0px;*/
+    flex-direction: column;
+    gap: 1%;
+}
+
+.code_window {
+    display: flex;
+    flex: 1;
+    border-radius: 10px;
+    flex-direction: column;
+    border: none;
+    padding: 0;
+    position: relative;
+    /*border: 1px solid black*/
+}
+
+.code_window_header {
+    display: flex;
+    padding: 8px 10px;
+    align-content: center;
+    position: relative;
+    border-radius: 10px 10px 0 0;
+    flex: none;
+}
+
+.fake_window_buttons {
+    display: flex;
+    align-items: center;
+    column-gap: 7px;
+    flex: 1 0 auto;
+}
+
+.fake_window_button {
+    width: 0.7rem;
+    aspect-ratio: 1/1;
+    border-radius: 50%;
+}
+
+.fake_window_button.b1 {
+    background: orangered;
+}
+
+.fake_window_button.b2 {
+    background: yellow;
+}
+
+.fake_window_button.b3 {
+    background: greenyellow;
+}
+
+.code_window_label {
+    text-align: center;
+    flex: 100%;
+}
+
+.ace_editor {
+    width: 100%;
+    height: 100%;
+    font-size: 15px;
+    border-radius: 0 0 10px 10px;
+    transition: filter 0.25s ease-out;
+    overflow: hidden;
+}
+
+.add_card_input_type {
+    flex: 1 0 auto;
+}

@@ -1,0 +1,207 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="fonts/fonts.css">
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="css/card_decks.css">
+    <link rel="stylesheet" href="css/add_card.css">
+    <link rel="stylesheet" href="css/error.css">
+    <link rel="stylesheet" href="css/reviewer.css">
+    <link rel="stylesheet" href="css/card_editor.css">
+    <title>FlashCode</title>
+</head>
+<body class="themed_element">
+<div class="full_screen_wrapper">
+    <div class="glass_center vertical_menu_ui">
+        <h1 class="welcome">Welcome to FlashCode!</h1>
+        <div class="window_contents">
+            <ul class="main_menu_deck_grid" id="all_decks"></ul>
+        </div>
+        <nav class="main_menu_navigation_buttons">
+            <button class="main_menu_button" id="add_deck_button"><i class="fa-solid fa-plus"></i></button>
+        </nav>
+    </div>
+</div>
+<div class="blocker_overlay_1" style="display: none"></div>
+<form class="add_deck_wrapper" style="display: none">
+    <label class="add_deck_label" for="add_deck_input">Add a new deck</label>
+    <input type="text" class="add_deck_input" id="add_deck_input" placeholder="New deck name">
+    <button class="confirm_add_deck_button bg_accept" id="confirm_add_deck" type="submit"><i class="fa-solid fa-check"></i></button>
+    <button class="confirm_add_deck_button bg_cancel" id="cancel_add_deck"><i class="fa-solid fa-xmark"></i></button>
+</form>
+<ul class="error_messages">
+    <li class="error_message" id="deck_already_exists">
+        <i class="fa-solid fa-xmark"></i><span>Card deck already exists. Please try another name!</span>
+    </li>
+    <li class="error_message" id="deck_empty_name">
+        <i class="fa-solid fa-xmark"></i><span>The card deck must not have an empty name.</span>
+    </li>
+</ul>
+<div class="full_screen_wrapper non_main_wrapper" id="add_card_wrapper" style="display: none">
+    <div class="glass_center vertical_menu_ui">
+        <div class="window_header">
+            <h2 class="window_heading">Add a card</h2>
+            <div class="window_header_buttons">
+                <button class="window_header_button close_button">
+                    <i class="fa-solid fa-xmark"></i>
+                </button>
+                <button class="window_header_button add_card_button">
+                    Add to Deck
+                </button>
+            </div>
+        </div>
+        <form class="window_contents code_windows_section">
+                <fieldset class="code_window">
+                    <div class="code_window_header">
+                        <div class="fake_window_buttons">
+                            <div class="fake_window_button b1"></div>
+                            <div class="fake_window_button b2"></div>
+                            <div class="fake_window_button b3"></div>
+                        </div>
+                        <label class="code_window_label" for="add_front">Front</label>
+                        <select class="add_card_input_type" id="add_front_input_type" target="add_front"></select>
+                    </div>
+<!--                    <textarea cols="30" rows="10" id="add_front" class="code_input"></textarea>-->
+                    <div id="add_front"></div>
+                </fieldset>
+                <fieldset class="code_window">
+                    <div class="code_window_header">
+                        <div class="fake_window_buttons">
+                            <div class="fake_window_button b1"></div>
+                            <div class="fake_window_button b2"></div>
+                            <div class="fake_window_button b3"></div>
+                        </div>
+                        <label class="code_window_label" for="add_back">Back</label>
+                        <select class="add_card_input_type" id="add_back_input_type" target="add_back"></select>
+                    </div>
+                    <div id="add_back"></div>
+                </fieldset>
+        </form>
+    </div>
+</div>
+<div class="full_screen_wrapper non_main_wrapper" id="review_card_wrapper" style="display: none">
+    <div class="glass_center vertical_menu_ui">
+        <div class="window_header">
+            <h2 class="window_heading">Review your cards</h2>
+            <div class="window_header_buttons">
+                <button class="window_header_button close_button">
+                    <i class="fa-solid fa-xmark"></i>
+                </button>
+            </div>
+        </div>
+        <form class="window_contents code_windows_section">
+            <fieldset class="code_window">
+                <div class="code_window_header">
+                    <div class="fake_window_buttons">
+                        <div class="fake_window_button b1"></div>
+                        <div class="fake_window_button b2"></div>
+                        <div class="fake_window_button b3"></div>
+                    </div>
+                    <label class="code_window_label" for="review_front">Front</label>
+                </div>
+                <div id="review_front"></div>
+            </fieldset>
+            <fieldset class="code_window">
+                <div class="code_window_header">
+                    <div class="fake_window_buttons">
+                        <div class="fake_window_button b1"></div>
+                        <div class="fake_window_button b2"></div>
+                        <div class="fake_window_button b3"></div>
+                    </div>
+                    <label class="code_window_label" for="review_back">Back</label>
+                </div>
+                <div id="review_back"></div>
+                <div id="review_back_block"></div>
+            </fieldset>
+        </form>
+        <nav class="self_grading_panel">
+            <button score="0">Relearn</button>
+            <button score="2">Very Hard</button>
+            <button score="3">Hard</button>
+            <button score="4">Good</button>
+            <button score="5">Perfect</button>
+        </nav>
+    </div>
+</div>
+<div class="full_screen_wrapper non_main_wrapper" id="edit_card_wrapper" style="display: none">
+    <div class="glass_center vertical_menu_ui">
+        <div class="window_header">
+            <h2 class="window_heading">Edit your cards</h2>
+            <div class="window_header_buttons">
+                <button class="window_header_button close_button">
+                    <i class="fa-solid fa-xmark"></i>
+                </button>
+            </div>
+        </div>
+        <div class="window_contents window_contents_edit_cards">
+            <div class="code_window">
+                <div class="code_window_header">
+                    <div class="fake_window_buttons">
+                        <div class="fake_window_button b1"></div>
+                        <div class="fake_window_button b2"></div>
+                        <div class="fake_window_button b3"></div>
+                    </div>
+                    <label class="code_window_label">Browse</label>
+                </div>
+                <div class="card_browser">
+                    <label class="card_search">
+                        <input type="text" placeholder="Search a card with Regex" class="card_search_input" id="card_search_input">
+                    </label>
+                    <ul class="card_search_output" id="card_search_output">
+
+                    </ul>
+                </div>
+            </div>
+            <form class="code_windows_section edit_cards_section">
+                <fieldset class="code_window">
+                    <div class="code_window_header">
+                        <div class="fake_window_buttons">
+                            <div class="fake_window_button b1"></div>
+                            <div class="fake_window_button b2"></div>
+                            <div class="fake_window_button b3"></div>
+                        </div>
+                        <label class="code_window_label" for="edit_front">Front</label>
+                    </div>
+                    <div id="edit_front"></div>
+                </fieldset>
+                <fieldset class="code_window">
+                    <div class="code_window_header">
+                        <div class="fake_window_buttons">
+                            <div class="fake_window_button b1"></div>
+                            <div class="fake_window_button b2"></div>
+                            <div class="fake_window_button b3"></div>
+                        </div>
+                        <label class="code_window_label" for="edit_back">Back</label>
+                    </div>
+                    <div id="edit_back"></div>
+                </fieldset>
+            </form>
+        </div>
+        <nav class="review_controls">
+        </nav>
+    </div>
+</div>
+<!-- Frameworks -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script src="https://pagecdn.io/lib/ace/1.4.13/ace.min.js"></script>
+<script src="js/emmet_core.js" crossorigin="anonymous"></script>
+<script src="https://pagecdn.io/lib/ace/1.4.13/ext-emmet.min.js" crossorigin="anonymous"></script>
+<script src="js/ldb_patched.js"></script>
+
+<!-- Main functionality -->
+<script src="js/init.js"></script>
+<script src="js/database.js"></script>
+<script src="js/main.js"></script>
+<script src="js/writer.js"></script>
+<script src="js/effects.js"></script>
+<script src="js/reviewer.js"></script>
+<script src="js/card_editor.js"></script>
+
+<!-- Icons -->
+<script src="https://kit.fontawesome.com/bac08de2ab.js" crossorigin="anonymous"></script>
+</body>
+</html>
